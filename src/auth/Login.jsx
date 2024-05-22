@@ -72,6 +72,7 @@ export const Login = () => {
         >
           <FormControl
             fullWidth
+            required
             variant="outlined"
           >
             <InputLabel>Password</InputLabel>
