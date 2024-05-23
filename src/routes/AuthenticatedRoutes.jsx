@@ -1,12 +1,18 @@
 import { Route, Routes } from "react-router";
-import { UserRoutes } from "./UserRoutes";
+import PagePersonalArea from "../personalArea/PagePersonalArea";
+import PageError from "../app/PageError";
 
 export default function AuthenticatedRoutes() {
   return (
     <Routes>
       <Route
-        path="/user"
-        element={<UserRoutes />}
+        path="/personal-area"
+        element={<PagePersonalArea />}
+      />
+
+      <Route
+        path="*"
+        element={<PageError targetPage="personal-area" />}
       />
     </Routes>
   );

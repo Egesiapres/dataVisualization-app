@@ -10,15 +10,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import KeyIcon from '@mui/icons-material/Key';
+import { useContext, useState } from "react";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import KeyIcon from "@mui/icons-material/Key";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import LoginIcon from "@mui/icons-material/Login";
+import { useNavigate } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 export const Login = () => {
+  const { login } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -31,15 +35,21 @@ export const Login = () => {
     event.preventDefault();
   };
 
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    login();
+    navigate("/personal-area");
+  };
+
   return (
     <Paper
       variant="outlined"
-      sx={{ p: 4 }}
+      sx={{ p: 4, maxWidth: 500 }}
     >
       <Grid
         container
         spacing={3}
-        sx={{ width: 500 }}
       >
         <Grid
           item
@@ -131,10 +141,8 @@ export const Login = () => {
         >
           <Button
             fullWidth
-            // variant="outlined"
             startIcon={<LoginIcon />}
-            // TODO: ...
-            onClick={() => {}}
+            onClick={handleLogin}
           >
             Login
           </Button>

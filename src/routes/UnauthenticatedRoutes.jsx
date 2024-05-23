@@ -1,13 +1,23 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router";
 import { PageAuth } from "../auth/PageAuth";
+import PageError from "../app/PageError";
 
-// Routing to AuthenticatedRoutes ???
 export default function UnauthenticatedRoutes() {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/login"
         element={<PageAuth />}
+      />
+
+      <Route
+        path="/"
+        element={<Navigate to="/login" />}
+      />
+
+      <Route
+        path="*"
+        element={<PageError targetPage="login" />}
       />
     </Routes>
   );
