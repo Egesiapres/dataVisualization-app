@@ -2,6 +2,7 @@ import { Button, Grid, Paper, Typography } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
+import Dashboard from "./dashboard/Dashboard";
 
 export default function PagePersonalArea() {
   const { logout } = useContext(AuthContext);
@@ -14,40 +15,42 @@ export default function PagePersonalArea() {
   };
 
   return (
-    <Paper
-      variant="outlined"
-      sx={{ p: 4, maxWidth: 1000 }}
-    >
-      <Grid
-        container
-        spacing={3}
-      >
-        <Grid
-          item
-          xs={12}
-        >
-          <Typography variant="h3">Hey Sir!</Typography>
-        </Grid>
+    // <Paper
+    //   variant="outlined"
+    //   sx={{ p: 4, maxWidth: 1000 }}
+    // >
+    //   <Grid
+    //     container
+    //     spacing={3}
+    //   >
+    //     <Grid
+    //       item
+    //       xs={12}
+    //     >
+    //       <Typography variant="h3">Hey Sir! 🐱</Typography>
+    //     </Grid>
 
-        <Grid
-          item
-          xs={12}
-        >
-          <Typography variant="h4">This is your personal area</Typography>
-        </Grid>
+    //     <Grid
+    //       item
+    //       xs={12}
+    //     >
+    //       <Typography variant="h4">This is your personal area</Typography>
+    //     </Grid>
 
-        <Grid
-          item
-          xs={12}
-        >
-          <Button
-            variant="contained"
-            onClick={handleLogout}
-          >
-            Log out
-          </Button>
-        </Grid>
-      </Grid>
-    </Paper>
+    //     <Grid
+    //       item
+    //       xs={12}
+    //     >
+    //       <Button
+    //         variant="contained"
+    //         onClick={handleLogout}
+    //       >
+    //         Log out
+    //       </Button>
+    //     </Grid>
+    //   </Grid>
+    // </Paper>
+
+    <Dashboard />
   );
 }

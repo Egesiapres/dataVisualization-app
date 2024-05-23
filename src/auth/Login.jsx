@@ -144,7 +144,7 @@ export const Login = () => {
             startIcon={<LoginIcon />}
             onClick={handleLogin}
           >
-            Login
+            Log in
           </Button>
         </Grid>
       </Grid>
