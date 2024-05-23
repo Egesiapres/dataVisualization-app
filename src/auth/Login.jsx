@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import EmailIcon from "@mui/icons-material/Email";
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import KeyIcon from '@mui/icons-material/Key';
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -69,7 +69,7 @@ export const Login = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <EmailIcon fontSize="small" />
+                  <AlternateEmailIcon fontSize="small" />
                 </InputAdornment>
               ),
             }}
