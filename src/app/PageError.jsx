@@ -2,7 +2,6 @@ import { Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import { formatFromPath } from "../utils/Text";
 
-// eslint-disable-next-line react/prop-types
 export default function PageError({ targetPage }) {
   const navigate = useNavigate();
 

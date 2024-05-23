@@ -2,7 +2,7 @@ import "../App.css";
 import { useContext } from "react";
 import AuthenticatedRoutes from "../routes/AuthenticatedRoutes";
 import UnauthenticatedRoutes from "../routes/UnauthenticatedRoutes";
-import { AuthContext, AuthContextProvider } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 const App = () => {
   const { isAuthenticated } = useContext(AuthContext);
