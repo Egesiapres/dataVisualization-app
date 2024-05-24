@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -15,11 +15,20 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainListItems } from "./listItems";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Copyright from "../../app/Copyright";
+import {
+  Tooltip,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const drawerWidth = 240;
 
@@ -71,17 +80,42 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 export default function Dashboard({ handleLogout }) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+
+  const [anchorElNav, setAnchorElNav] = useState(null);
+
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  const handleOpenUserMenu = event => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const settings = [
+    {
+      icon: <SettingsIcon fontSize="small" />,
+      name: "Account",
+      action: () => {},
+    },
+    {
+      icon: <LogoutIcon fontSize="small" />,
+      name: "Log out",
+      action: handleLogout,
+    },
+  ];
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        
+
         <AppBar
           position="absolute"
           open={open}
@@ -112,15 +146,46 @@ export default function Dashboard({ handleLogout }) {
             >
               Dashboard
             </Typography>
-            <IconButton
-              color="inherit"
-              onClick={handleLogout}
-            >
-              <LogoutIcon />
-            </IconButton>
+
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0 }}
+                >
+                  <AccountCircleIcon />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map(({ icon, name, action }, i) => (
+                  <MenuItem
+                    key={i}
+                    onClick={action}
+                  >
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText>{name}</ListItemText>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
           </Toolbar>
         </AppBar>
-        
+
         <Drawer
           variant="permanent"
           open={open}
@@ -138,13 +203,9 @@ export default function Dashboard({ handleLogout }) {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
+          <List component="nav">{mainListItems}</List>
         </Drawer>
-        
+
         <Box
           component="main"
           sx={{

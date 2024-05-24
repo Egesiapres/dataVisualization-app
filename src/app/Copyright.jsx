@@ -20,6 +20,7 @@ export default function Copyright(props) {
         <Link
           color="inherit"
           href="https://github.com/Egesiapres"
+          target="_blank"
         >
           Egesiapres
         </Link>{" "}
