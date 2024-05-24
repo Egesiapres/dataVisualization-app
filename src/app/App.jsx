@@ -11,22 +11,3 @@ const App = () => {
 };
 
 export default App;
-
-// wrapping di Authenticator così da poter accedere alle sue proprietà
-// function App() {
-//   <AuthContextProvider>
-//     <Authenticator />
-//   </AuthContextProvider>;
-// }
-
-// const Authenticator = () => {
-//   const { isAuthenticated } = useContext(AuthContext);
-
-//   return (
-//     <Routes>
-//       {isAuthenticated ? <AuthenticatedRoutes /> : <UnauthenticatedRoutes />}
-//     </Routes>
-//   );
-// };
-
-// export default App;
