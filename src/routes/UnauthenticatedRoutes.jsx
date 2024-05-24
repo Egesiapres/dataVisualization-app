@@ -11,6 +11,11 @@ export default function UnauthenticatedRoutes() {
       />
 
       <Route
+        path="/register"
+        element={<PageAuth />}
+      />
+
+      <Route
         path="/"
         element={<Navigate to="/login" />}
       />

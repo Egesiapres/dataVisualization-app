@@ -1,8 +1,8 @@
-import { Button, Grid, Paper, Typography } from "@mui/material";
+// import { Button, Grid, Paper, Typography } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
-import Dashboard from "./dashboard/Dashboard";
+import Dashboard from "../layout/dashboard/Dashboard";
 
 export default function PagePersonalArea() {
   const { logout } = useContext(AuthContext);
@@ -51,6 +51,6 @@ export default function PagePersonalArea() {
     //   </Grid>
     // </Paper>
 
-    <Dashboard />
+    <Dashboard handleLogout={handleLogout} />
   );
 }

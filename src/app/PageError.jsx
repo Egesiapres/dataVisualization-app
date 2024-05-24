@@ -13,6 +13,11 @@ export default function PageError({ targetPage }) {
     <Grid
       container
       spacing={2}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      sx={{ minHeight: "100vh" }}
+      textAlign="center"
     >
       <Grid
         item

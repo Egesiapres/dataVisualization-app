@@ -15,13 +15,17 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import KeyIcon from "@mui/icons-material/Key";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import LoginIcon from "@mui/icons-material/Login";
-import { useNavigate } from "react-router";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { AuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-export default function Login() {
-  const { login, setHasAccount } = useContext(AuthContext);
+export const Register = () => {
+  const { setHasAccount } = useContext(AuthContext);
+
+  const [name, setName] = useState("");
+
+  const [surname, setSurname] = useState("");
 
   const [email, setEmail] = useState("");
 
@@ -37,9 +41,9 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    login();
-    navigate("/personal-area");
+  const handleBackToLogin = () => {
+    setHasAccount(true);
+    navigate("/login");
   };
 
   return (
@@ -58,11 +62,41 @@ export default function Login() {
           my={3}
         >
           <Typography
-            variant="h3"
+            variant="h4"
             color="black"
           >
-            Welcome Back! 👋
+            Create your Account 🐱
           </Typography>
+        </Grid>
+
+        <Grid
+          item
+          xs={6}
+        >
+          <TextField
+            fullWidth
+            required
+            autoFocus
+            label="Name"
+            placeholder="Name"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+        </Grid>
+
+        <Grid
+          item
+          xs={6}
+        >
+          <TextField
+            fullWidth
+            required
+            autoFocus
+            label="Surname"
+            placeholder="Surname"
+            value={surname}
+            onChange={e => setSurname(e.target.value)}
+          />
         </Grid>
 
         <Grid
@@ -125,21 +159,15 @@ export default function Login() {
         <Grid
           item
           xs={12}
-          mt={1}
         >
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            align="left"
+          <Button
+            fullWidth
+            variant="contained"
+            startIcon={<PersonAddIcon />}
+            onClick={() => {}}
           >
-            {"Don't"} have an account?{" "}
-            <Link
-              to="/register"
-              onClick={() => setHasAccount(false)}
-            >
-              Register
-            </Link>
-          </Typography>
+            Register
+          </Button>
         </Grid>
 
         <Grid
@@ -148,13 +176,13 @@ export default function Login() {
         >
           <Button
             fullWidth
-            startIcon={<LoginIcon />}
-            onClick={handleLogin}
+            startIcon={<ArrowBackIcon />}
+            onClick={handleBackToLogin}
           >
-            Log in
+            Back to Log in
           </Button>
         </Grid>
       </Grid>
     </Paper>
   );
-}
+};
