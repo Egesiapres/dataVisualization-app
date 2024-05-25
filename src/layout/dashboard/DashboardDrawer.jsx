@@ -1,7 +1,7 @@
 import { Divider, IconButton, List, Toolbar, styled } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
-import { mainListItems } from "./listItems";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ListItems from "./ListItems";
 
 const drawerWidth = 240;
 
@@ -52,7 +52,9 @@ export default function DashboardDrawer({ open, toggleDrawer }) {
 
       <Divider />
 
-      <List component="nav">{mainListItems}</List>
+      <List component="nav">
+        <ListItems />
+      </List>
     </Drawer>
   );
 }

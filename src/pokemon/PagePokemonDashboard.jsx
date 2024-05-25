@@ -2,7 +2,7 @@ import { Container, Grid, Paper } from "@mui/material";
 import PokemonSearch from "./PokemonSearch";
 import PokemonInfo from "./PokemonInfo";
 
-export default function PagePokemon() {
+export default function PagePokemonDashboard() {
   return (
     <Container
       maxWidth="lg"

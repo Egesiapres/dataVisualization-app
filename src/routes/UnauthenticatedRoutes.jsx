@@ -1,18 +1,19 @@
 import { Navigate, Route, Routes } from "react-router";
-import { PageAuth } from "../auth/PageAuth";
 import PageError from "../app/PageError";
+import PageLogin from "../auth/login/PageLogin";
+import PageRegister from "../auth/register/PageRegister";
 
 export default function UnauthenticatedRoutes() {
   return (
     <Routes>
       <Route
         path="/login"
-        element={<PageAuth />}
+        element={<PageLogin />}
       />
 
       <Route
         path="/register"
-        element={<PageAuth />}
+        element={<PageRegister />}
       />
 
       <Route
