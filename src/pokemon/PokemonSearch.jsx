@@ -1,5 +1,6 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function PokemonSearch() {
   const [name, setName] = useState("");
@@ -7,7 +8,7 @@ export default function PokemonSearch() {
   return (
     <Grid
       container
-      spacing={2}      
+      spacing={2}
     >
       <Grid item>
         <TextField
@@ -18,8 +19,16 @@ export default function PokemonSearch() {
         />
       </Grid>
 
-      <Grid item my="auto">
-        <Button variant="contained">Cerca</Button>
+      <Grid
+        item
+        my="auto"
+      >
+        <Button
+          variant="contained"
+          startIcon={<SearchIcon />}
+        >
+          Search
+        </Button>
       </Grid>
     </Grid>
   );

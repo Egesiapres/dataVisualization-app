@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import PageError from "../app/PageError";
-import PageAccount from "../layout/dashboard/PageAccount";
+import PageAccount from "../account/PageAccount";
 import PageDashboard from "../layout/dashboard/UserDashboard";
 
 export default function AuthenticatedRoutes() {

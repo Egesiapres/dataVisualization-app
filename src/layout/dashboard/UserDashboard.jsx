@@ -1,10 +1,10 @@
 import DashboardLayout from "./DashboardLayout";
-import DashboardContent from "../../user/DashboardContent";
+import PagePokemon from "../../pokemon/PagePokemon";
 
-export default function PageDashboard() {
+export default function UserDashboard() {
   return (
     <DashboardLayout>
-      <DashboardContent />
+      <PagePokemon />
     </DashboardLayout>
   );
 }
