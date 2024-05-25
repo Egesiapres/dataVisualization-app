@@ -1,11 +1,10 @@
-import * as React from "react";
 import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Title from "../ui/Title";
+import Title from "../../ui/Title";
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -59,9 +58,9 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Orders() {
+export default function PokemonInfo() {
   return (
-    <React.Fragment>
+    <>
       <Title>Recent Orders</Title>
       <Table size="small">
         <TableHead>
@@ -93,6 +92,6 @@ export default function Orders() {
       >
         See more orders
       </Link>
-    </React.Fragment>
+    </>
   );
 }

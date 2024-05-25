@@ -72,7 +72,7 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-export default function Dashboard({ content }) {
+export default function DashboardLayout({ children }) {
   const { logout } = useContext(AuthContext);
 
   const [open, setOpen] = useState(true);
@@ -219,7 +219,7 @@ export default function Dashboard({ content }) {
       >
         <Toolbar />
 
-        {content}
+        {children}
 
         <Copyright sx={{ pt: 4 }} />
       </Box>
