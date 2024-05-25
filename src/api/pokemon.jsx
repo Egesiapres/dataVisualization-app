@@ -1,12 +1,10 @@
 import { get } from "./api.jsx";
 
 /**
- * get pokemon
+ * get pokemon info
  *
- * @param {string}
- * @param {string}
- * @param {string}
- * @returns {string}
+ * @param {string} // pokemon name
+ * @returns {object} // pokemon data
  */
 
-export const getPokemon = pokemonName => get(`/${pokemonName}`);
+export const getPokemon = pokemonName => get(`pokemon/${pokemonName}`);
