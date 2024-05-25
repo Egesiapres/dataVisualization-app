@@ -1,10 +1,8 @@
-import { Button, Grid, TextField } from "@mui/material";
-import { useState } from "react";
+import { Grid, TextField } from "@mui/material";
+import { LoadingButton } from '@mui/lab';
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function PokemonSearch() {
-  const [name, setName] = useState("");
-
+export default function PokemonSearch({ name, setName, status, handleSearch }) {
   return (
     <Grid
       container
@@ -23,12 +21,14 @@ export default function PokemonSearch() {
         item
         my="auto"
       >
-        <Button
+        <LoadingButton
+          loading={status.isLoading}
           variant="contained"
           startIcon={<SearchIcon />}
+          onClick={handleSearch}
         >
           Search
-        </Button>
+        </LoadingButton>
       </Grid>
     </Grid>
   );
