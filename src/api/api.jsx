@@ -1,31 +1,31 @@
-import axios from 'axios';
+import axios from "axios";
+import { config } from "../../config";
 
-export const baseUrl = 'https://pokeapi.co/api/v2/';
+const { api } = config;
 
-const request = async (url, options) => {
+// generic request
+const request = async (method, path) => {
+  // if (!path) {
+  //   throw new Error("API error: path is missing");
+  // }
+
   try {
-    let response = await axios.get(url, options);
+    const baseUrl = api.pokemon;
 
-    return response;
+    const url = `${baseUrl}/${path}`;
+
+    const config = {
+      url,
+      method,
+    };
+
+    const response = await axios(config);
+
+    return response.data;
   } catch (error) {
-    console.log(error);
+    throw new Error(`API error: ${error}`);
   }
 };
 
 // HTTP methods
-export const get = endpoint =>
-  request(`${baseUrl}${endpoint}`, { method: 'GET' });
-
-// main fetch f
-export const fetchData = async (api, params) => {
-  try {
-    // TODO: study
-    const response = await api.apply(null, params);
-
-    const data = await response.json();
-
-    return data[0] || data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const get = async endpoint => request("GET", endpoint);
