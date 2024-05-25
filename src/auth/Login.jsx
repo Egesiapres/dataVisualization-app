@@ -39,7 +39,7 @@ export default function Login() {
 
   const handleLogin = () => {
     login();
-    navigate("/personal-area");
+    navigate("/user/dashboard");
   };
 
   return (

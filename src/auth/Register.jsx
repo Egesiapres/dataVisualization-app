@@ -20,7 +20,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 
-export const Register = () => {
+export default function Register() {
   const { setHasAccount } = useContext(AuthContext);
 
   const [name, setName] = useState("");
@@ -185,4 +185,4 @@ export const Register = () => {
       </Grid>
     </Paper>
   );
-};
+}

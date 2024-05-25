@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
-import Login from "./Login";
-import Copyright from "../app/Copyright";
-import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
-import { Register } from "./Register";
+import { AuthContext } from "../context/AuthContext";
+import Login from "./Login";
+import Register from "./Register";
+import Copyright from "../app/Copyright";
 
 export const PageAuth = () => {
   const { hasAccount } = useContext(AuthContext);

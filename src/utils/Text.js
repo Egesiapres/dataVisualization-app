@@ -1,1 +1,1 @@
-export const formatFromPath = path => path.split("-").join(" ");
+export const formatFromPath = path => path.split("/").join(" ");

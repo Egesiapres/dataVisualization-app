@@ -29,6 +29,7 @@ import {
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { useNavigate } from "react-router";
 
 const drawerWidth = 240;
 
@@ -82,8 +83,6 @@ const defaultTheme = createTheme();
 export default function Dashboard({ handleLogout }) {
   const [open, setOpen] = useState(true);
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
-
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const toggleDrawer = () => {
@@ -98,11 +97,13 @@ export default function Dashboard({ handleLogout }) {
     setAnchorElUser(null);
   };
 
+  const navigate = useNavigate();
+
   const settings = [
     {
       icon: <SettingsIcon fontSize="small" />,
       name: "Account",
-      action: () => {},
+      action: () => navigate("/user/account"),
     },
     {
       icon: <LogoutIcon fontSize="small" />,
