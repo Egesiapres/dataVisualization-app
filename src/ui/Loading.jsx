@@ -1,7 +1,11 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 
 export default function Loading() {
   return (
-    <CircularProgress />
+    <Grid container justifyContent="center">
+      <Grid item>
+        <CircularProgress />
+      </Grid>
+    </Grid>
   );
 }
