@@ -42,7 +42,7 @@ export default function DashboardLayout({ children }) {
 
         {children}
 
-        <Copyright sx={{ pt: 4 }} />
+        {/* <Copyright sx={{ pt: 4 }} /> */}
       </Box>
     </Box>
   );

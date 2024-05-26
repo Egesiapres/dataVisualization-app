@@ -1,16 +1,14 @@
 import { Container, Grid, Paper } from "@mui/material";
-import PokemonSearch from "./PokemonSearch";
-import PokemonInfo from "./PokemonInfo";
 import { getPokemon } from "../api/pokemon";
 import { useState } from "react";
 import { useStatus } from "../hooks/useStatus";
-import { useApi } from "../hooks/useApi";
 import Loading from "../ui/Loading";
 import Error from "../ui/Error";
+import PokemonSearch from "./PokemonSearch";
+import PokemonInfo from "./PokemonInfo";
+import Info from "../ui/Info";
 
 export default function PagePokemonDashboard() {
-  const { data: pokemonList, isLoading, error } = useApi(() => getPokemon(""));
-
   const [name, setName] = useState("");
 
   const [pokemon, setPokemon] = useState(null);
@@ -18,16 +16,18 @@ export default function PagePokemonDashboard() {
   const status = useStatus();
 
   const handleSearch = async () => {
-    try {
+    if (name) {
       status.setLoading();
 
-      const response = await getPokemon(name);
+      try {
+        const pokemon = await getPokemon(name);
 
-      setPokemon(response);
+        setPokemon(pokemon);
 
-      status.setSuccess();
-    } catch (error) {
-      status.setError(error);
+        status.setSuccess();
+      } catch (error) {
+        status.setError(error);
+      }
     }
   };
 
@@ -43,6 +43,8 @@ export default function PagePokemonDashboard() {
         <Grid
           item
           xs={12}
+          container
+          justifyContent="center"
         >
           <Paper
             sx={{ p: 2 }}
@@ -51,6 +53,7 @@ export default function PagePokemonDashboard() {
             <PokemonSearch
               name={name}
               setName={setName}
+              setPokemon={setPokemon}
               status={status}
               handleSearch={handleSearch}
             />
@@ -66,13 +69,26 @@ export default function PagePokemonDashboard() {
           ) : status.error ? (
             <Error error={status.error} />
           ) : pokemon ? (
-            <Paper
-              sx={{ p: 2, display: "flex", flexDirection: "column" }}
-              variant="outlined"
+            <Grid
+              container
+              justifyContent="center"
             >
-              <PokemonInfo />
-            </Paper>
-          ) : null}
+              <Grid
+                item
+                xs={12}
+                // md={9}
+              >
+                <PokemonInfo pokemon={pokemon} />
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid
+              item
+              xs={12}
+            >
+              <Info text="To get Pokémon details search one by name." />
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Container>

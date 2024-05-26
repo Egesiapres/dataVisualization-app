@@ -1,12 +1,13 @@
 import Typography from "@mui/material/Typography";
 
-function Title({ children }) {
+function Title({ children, variant = "h6", align = "center", ...props  }) {
   return (
-    <Typography
-      component="h2"
-      variant="h6"
+    <Typography      
+      variant={variant}
       color="primary"
-      gutterBottom
+      align={align}
+      m={2}
+      {...props}
     >
       {children}
     </Typography>

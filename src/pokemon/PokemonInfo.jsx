@@ -1,97 +1,101 @@
-import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "../ui/Title";
+import { capitalizeFirstChar } from "../utils/text";
+import { Card, CardHeader, Divider } from "@mui/material";
+import PetsIcon from "@mui/icons-material/Pets";
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
+export default function PokemonInfo({ pokemon }) {
+  const {
+    name,
+    species,
+    types,
+    abilities,
+    base_experience,
+    height,
+    weight,
+    moves,
+    game_indices,
+  } = pokemon;
 
-const rows = [
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "VISA ⠀•••• 3719",
-    312.44
-  ),
-  createData(
-    1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ⠀•••• 2574",
-    866.99
-  ),
-  createData(
-    2,
-    "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    100.81
-  ),
-  createData(
-    3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    654.39
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    212.79
-  ),
-];
+  const pokemonTableRows = [
+    {
+      name: "Species",
+      value: capitalizeFirstChar(species.name),
+    },
+    {
+      name: "Types",
+      value: types
+        .map(({ type: { name } }) => capitalizeFirstChar(name))
+        .join(", "),
+    },
+    {
+      name: "Abilities",
+      value: abilities
+        .map(({ ability: { name } }) => capitalizeFirstChar(name))
+        .join(", "),
+    },
+    { name: "Base experience", value: base_experience },
+    { name: "Height", value: height },
+    { name: "Weight", value: weight },
+    {
+      name: "Moves",
+      value: moves
+        .map(({ move: { name } }) => capitalizeFirstChar(name))
+        .join(", "),
+    },
+    {
+      name: "Game indices",
+      value: game_indices
+        .map(({ version: { name } }) => capitalizeFirstChar(name))
+        .join(", "),
+    },
+  ];
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-export default function PokemonInfo() {
   return (
-    <>
-      <Title>Recent Orders</Title>
+    <Card variant="outlined">
+      <CardHeader
+        subheader="Pokémon Info"
+        avatar={
+          <PetsIcon
+            fontSize="small"
+            color="action"
+          />
+        }
+      />
+
+      <Divider />
+
+      <Title
+        variant="h4"
+        align="left"
+      >
+        {capitalizeFirstChar(name)}
+      </Title>
+
+      <Divider />
+
       <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+          {pokemonTableRows.map(({ name, value }, i) => (
+            <TableRow key={i}>
+              <TableCell>
+                <Title
+                  variant="body2"
+                  align="left"
+                  m={0}
+                  width={150}
+                >
+                  {name}
+                </Title>
+              </TableCell>
+              <TableCell align="right">{value}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Link
-        color="primary"
-        href="#"
-        onClick={preventDefault}
-        sx={{ mt: 3 }}
-      >
-        See more orders
-      </Link>
-    </>
+    </Card>
   );
 }

@@ -1,6 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
-import { formatFromPath } from "../utils/Text";
+import { formatFromPath } from "../utils/text";
 
 export default function PageError({ targetPage }) {
   const navigate = useNavigate();
