@@ -8,25 +8,25 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "fetch_start":
+    case "REQUEST_START":
       return {
-        loading: true,
+        isLoading: true,
         data: [],
         error: false,
       };
 
-    case "fetch_success":
+    case "REQUEST_SUCCESS":
       return {
-        loading: false,
+        isLoading: false,
         data: action.payload,
         error: false,
       };
 
-    case "fetch_error":
+    case "REQUEST_ERROR":
       return {
-        loading: false,
+        isLoading: false,
         data: [],
-        error: true,
+        error: action.payload,
       };
 
     default:
@@ -38,16 +38,16 @@ export const useApi = api => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchData = async () => {
+    dispatch({ type: "REQUEST_START" });
+
     try {
-      dispatch({ type: "fetch_start" });
+      const data = await api();
 
-      const response = await api();
-      console.log("response:", response);
+      dispatch({ type: "REQUEST_SUCCESS", payload: data });
 
-      dispatch({ type: "fetch_success" });
+      return data;
     } catch (error) {
-      dispatch({ type: "fetch_error" });
-      console.error(error);
+      dispatch({ type: "REQUEST_ERROR", payload: error });
     }
   };
 
