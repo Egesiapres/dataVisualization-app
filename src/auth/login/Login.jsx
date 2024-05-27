@@ -1,6 +1,8 @@
 import {
+  Alert,
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputAdornment,
@@ -10,18 +12,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import KeyIcon from "@mui/icons-material/Key";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
-import { useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import { handleKeyDown } from "../../utils/event";
 
 export default function Login() {
-  const { login, setHasAccount } = useContext(AuthContext);
+  const { login, error, setError } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
 
@@ -29,17 +31,23 @@ export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  useEffect(() => {
+    console.log("localStorage:", localStorage);
+  }, []);
+
   const handleClickShowPassword = () => setShowPassword(show => !show);
 
   const handleMouseDownPassword = event => {
     event.preventDefault();
   };
 
-  const navigate = useNavigate();
+  const handleField = (event, setField) => {
+    setField(event.target.value);
+    setError(null);
+  };
 
   const handleLogin = () => {
-    login();
-    navigate("/user/dashboard");
+    login(email, password);
   };
 
   return (
@@ -76,7 +84,8 @@ export default function Login() {
             label="E-mail Address"
             placeholder="E-mail Address"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={e => handleField(e, setEmail)}
+            onKeyDown={e => handleKeyDown(e, handleLogin)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -84,6 +93,11 @@ export default function Login() {
                 </InputAdornment>
               ),
             }}
+            {...(!email &&
+              error && {
+                error: true,
+                helperText: error.message,
+              })}
           />
         </Grid>
 
@@ -95,6 +109,10 @@ export default function Login() {
             fullWidth
             required
             variant="outlined"
+            {...(!password &&
+              error && {
+                error: true,
+              })}
           >
             <InputLabel>Password</InputLabel>
             <OutlinedInput
@@ -117,10 +135,29 @@ export default function Login() {
               label="Password"
               placeholder="Password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={e => handleField(e, setPassword)}
+              onKeyDown={e => handleKeyDown(e, handleLogin)}
             />
           </FormControl>
+
+          {!password && error && (
+            <FormHelperText
+              error
+              sx={{ mx: 1 }}
+            >
+              {error.message}
+            </FormHelperText>
+          )}
         </Grid>
+
+        {email && password && error && (
+          <Grid
+            item
+            xs={12}
+          >
+            <Alert severity="error">{error.message}</Alert>
+          </Grid>
+        )}
 
         <Grid
           item
@@ -132,13 +169,7 @@ export default function Login() {
             color="text.secondary"
             align="left"
           >
-            {"Don't"} have an account?{" "}
-            <Link
-              to="/register"
-              onClick={() => setHasAccount(false)}
-            >
-              Register
-            </Link>
+            {"Don't"} have an account? <Link to="/register">Register</Link>
           </Typography>
         </Grid>
 
