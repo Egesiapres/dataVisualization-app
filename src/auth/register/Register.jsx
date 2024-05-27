@@ -21,7 +21,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 
 export default function Register() {
-  const { setHasAccount } = useContext(AuthContext);
+  const { createAccount } = useContext(AuthContext);
 
   const [name, setName] = useState("");
 
@@ -39,10 +39,22 @@ export default function Register() {
     event.preventDefault();
   };
 
+  const isRegisterFormFilled = name && surname && email && password;
+
+  const account = {
+    name,
+    surname,
+    email,
+    password,
+  };
+
+  const handleRegister = () => {
+    isRegisterFormFilled && createAccount(email, account);
+  };
+
   const navigate = useNavigate();
 
   const handleBackToLogin = () => {
-    setHasAccount(true);
     navigate("/login");
   };
 
@@ -162,9 +174,10 @@ export default function Register() {
         >
           <Button
             fullWidth
+            disabled={!isRegisterFormFilled}
             variant="contained"
             startIcon={<PersonAddIcon />}
-            onClick={() => {}}
+            onClick={handleRegister}
           >
             Register
           </Button>
