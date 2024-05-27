@@ -107,7 +107,7 @@ export default function DashboardAppBar({ open, toggleDrawer }) {
             variant="subtitle1"
             mr={2}
           >
-            {account.name} {account.surname}
+            {account?.name} {account?.surname}
           </Typography>
 
           <Tooltip title="Open settings">

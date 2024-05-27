@@ -14,12 +14,21 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const [error, setError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
+
+  const [registerError, setRegisterError] = useState(null);
+
+  const [registerSuccess, setRegisterSuccess] = useState(null);
 
   const [account, setAccount] = useState(null);
 
   const createAccount = (email, account) => {
-    setItem(email, account);
+    if (Object.values(account).every(value => value)) {
+      setRegisterSuccess({ message: "Account created successfully" });
+      setItem(email, account);
+    } else {
+      setRegisterError({ message: "Required field" });
+    }
   };
 
   const navigate = useNavigate();
@@ -36,13 +45,13 @@ export const AuthContextProvider = ({ children }) => {
 
         navigate("/user/dashboard");
       } else {
-        setError({ message: "Wrong Email address or Password!" });
+        setLoginError({ message: "Wrong Email address or Password!" });
       }
     } else {
-      setError({ message: "Account not found!" });
+      setLoginError({ message: "Account not found!" });
     }
 
-    (!email || !password) && setError({ message: "Required field" });
+    (!email || !password) && setLoginError({ message: "Required field" });
   };
 
   const logout = () => {
@@ -67,8 +76,12 @@ export const AuthContextProvider = ({ children }) => {
     isAuthenticated,
     account,
     setAccount,
-    error,
-    setError,
+    loginError,
+    setLoginError,
+    registerError,
+    setRegisterError,
+    registerSuccess,
+    setRegisterSuccess,
     createAccount,
     login,
     logout,

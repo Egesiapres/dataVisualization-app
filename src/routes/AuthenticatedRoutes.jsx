@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import PageError from "../app/PageError";
-import PageAccount from "../account/PageAccount";
+import PageEditAccount from "../account/PageAccount";
 import DashboardUser from "../layout/dashboard/DashboardUser";
 import PagePokemonDashboard from "../pokemon/PagePokemonDashboard";
 
@@ -15,7 +15,7 @@ export default function AuthenticatedRoutes() {
 
         <Route
           path="/user/account"
-          element={<PageAccount />}
+          element={<PageEditAccount />}
         />
 
         <Route

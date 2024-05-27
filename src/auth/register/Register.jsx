@@ -1,6 +1,8 @@
 import {
+  Alert,
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputAdornment,
@@ -19,9 +21,11 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
+import { handleKeyDown, handleOnChange } from "../../utils/event";
 
 export default function Register() {
-  const { createAccount } = useContext(AuthContext);
+  const { createAccount, registerError, setRegisterError, registerSuccess, setRegisterSuccess } =
+    useContext(AuthContext);
 
   const [name, setName] = useState("");
 
@@ -39,8 +43,6 @@ export default function Register() {
     event.preventDefault();
   };
 
-  const isRegisterFormFilled = name && surname && email && password;
-
   const account = {
     name,
     surname,
@@ -49,13 +51,15 @@ export default function Register() {
   };
 
   const handleRegister = () => {
-    isRegisterFormFilled && createAccount(email, account);
+    createAccount(email, account);
   };
 
   const navigate = useNavigate();
 
   const handleBackToLogin = () => {
     navigate("/login");
+    setRegisterError(null);
+    setRegisterSuccess(null);
   };
 
   return (
@@ -92,7 +96,13 @@ export default function Register() {
             label="Name"
             placeholder="Name"
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={e => handleOnChange(e, setName, setRegisterError)}
+            onKeyDown={e => handleKeyDown(e, handleRegister)}
+            {...(!name &&
+              registerError && {
+                error: true,
+                helperText: registerError.message,
+              })}
           />
         </Grid>
 
@@ -107,7 +117,13 @@ export default function Register() {
             label="Surname"
             placeholder="Surname"
             value={surname}
-            onChange={e => setSurname(e.target.value)}
+            onChange={e => handleOnChange(e, setSurname, setRegisterError)}
+            onKeyDown={e => handleKeyDown(e, handleRegister)}
+            {...(!surname &&
+              registerError && {
+                error: true,
+                helperText: registerError.message,
+              })}
           />
         </Grid>
 
@@ -122,7 +138,8 @@ export default function Register() {
             label="E-mail Address"
             placeholder="E-mail Address"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={e => handleOnChange(e, setEmail, setRegisterError)}
+            onKeyDown={e => handleKeyDown(e, handleRegister)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -130,6 +147,11 @@ export default function Register() {
                 </InputAdornment>
               ),
             }}
+            {...(!email &&
+              registerError && {
+                error: true,
+                helperText: registerError.message,
+              })}
           />
         </Grid>
 
@@ -141,6 +163,10 @@ export default function Register() {
             fullWidth
             required
             variant="outlined"
+            {...(!password &&
+              registerError && {
+                error: true,
+              })}
           >
             <InputLabel>Password</InputLabel>
             <OutlinedInput
@@ -163,10 +189,29 @@ export default function Register() {
               label="Password"
               placeholder="Password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={e => handleOnChange(e, setPassword, setRegisterError)}
+              onKeyDown={e => handleKeyDown(e, handleRegister)}
             />
           </FormControl>
+
+          {!password && registerError && (
+            <FormHelperText
+              error
+              sx={{ mx: 1 }}
+            >
+              {registerError.message}
+            </FormHelperText>
+          )}
         </Grid>
+
+        {name && surname && email && password && registerSuccess && (
+          <Grid
+            item
+            xs={12}
+          >
+            <Alert severity="success">{registerSuccess.message}</Alert>
+          </Grid>
+        )}
 
         <Grid
           item
@@ -174,10 +219,10 @@ export default function Register() {
         >
           <Button
             fullWidth
-            disabled={!isRegisterFormFilled}
             variant="contained"
             startIcon={<PersonAddIcon />}
             onClick={handleRegister}
+            onKeyDown={e => handleKeyDown(e, handleRegister)}
           >
             Register
           </Button>

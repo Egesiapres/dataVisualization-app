@@ -20,10 +20,11 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import { handleKeyDown } from "../../utils/event";
+import { handleKeyDown, handleOnChange } from "../../utils/event";
+// import { clearItems } from "../../utils/localStorage";
 
 export default function Login() {
-  const { login, error, setError } = useContext(AuthContext);
+  const { login, loginError, setLoginError } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
 
@@ -31,19 +32,17 @@ export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  // accounts management utils
   useEffect(() => {
     console.log("localStorage:", localStorage);
+    // clearItems();
+    localStorage.setItem("authStatus", "false");
   }, []);
 
   const handleClickShowPassword = () => setShowPassword(show => !show);
 
   const handleMouseDownPassword = event => {
     event.preventDefault();
-  };
-
-  const handleField = (event, setField) => {
-    setField(event.target.value);
-    setError(null);
   };
 
   const handleLogin = () => {
@@ -84,7 +83,7 @@ export default function Login() {
             label="E-mail Address"
             placeholder="E-mail Address"
             value={email}
-            onChange={e => handleField(e, setEmail)}
+            onChange={e => handleOnChange(e, setEmail, setLoginError)}
             onKeyDown={e => handleKeyDown(e, handleLogin)}
             InputProps={{
               startAdornment: (
@@ -94,9 +93,9 @@ export default function Login() {
               ),
             }}
             {...(!email &&
-              error && {
+              loginError && {
                 error: true,
-                helperText: error.message,
+                helperText: loginError.message,
               })}
           />
         </Grid>
@@ -110,7 +109,7 @@ export default function Login() {
             required
             variant="outlined"
             {...(!password &&
-              error && {
+              loginError && {
                 error: true,
               })}
           >
@@ -135,27 +134,27 @@ export default function Login() {
               label="Password"
               placeholder="Password"
               value={password}
-              onChange={e => handleField(e, setPassword)}
+              onChange={e => handleOnChange(e, setPassword, setLoginError)}
               onKeyDown={e => handleKeyDown(e, handleLogin)}
             />
           </FormControl>
 
-          {!password && error && (
+          {!password && loginError && (
             <FormHelperText
               error
               sx={{ mx: 1 }}
             >
-              {error.message}
+              {loginError.message}
             </FormHelperText>
           )}
         </Grid>
 
-        {email && password && error && (
+        {email && password && loginError && (
           <Grid
             item
             xs={12}
           >
-            <Alert severity="error">{error.message}</Alert>
+            <Alert severity="error">{loginError.message}</Alert>
           </Grid>
         )}
 
@@ -169,7 +168,13 @@ export default function Login() {
             color="text.secondary"
             align="left"
           >
-            {"Don't"} have an account? <Link to="/register">Register</Link>
+            {"Don't"} have an account?{" "}
+            <Link
+              to="/register"
+              onClick={() => setLoginError(null)}
+            >
+              Register
+            </Link>
           </Typography>
         </Grid>
 
