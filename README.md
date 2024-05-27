@@ -53,7 +53,6 @@ The app will be available at this [link](http://localhost:5173/)
 
 ### Aesthetic
 
-- **Palette:** I've decided to follow your website palette, trying to achieve a paper like effect (Zed's website inspiration);
 - **Emojis:** they're a current trend, they're able to give an appealing aesthetic and a kind of a flat and very clean design at the same time
 
 <!-- # React + Vite
