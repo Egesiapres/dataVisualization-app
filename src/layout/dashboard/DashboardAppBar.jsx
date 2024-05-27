@@ -40,7 +40,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function DashboardAppBar({ open, toggleDrawer }) {
-  const { logout } = useContext(AuthContext);
+  const { logout, account } = useContext(AuthContext);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -54,11 +54,6 @@ export default function DashboardAppBar({ open, toggleDrawer }) {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
   const accountSettings = [
     {
       title: "Manage your account",
@@ -68,7 +63,7 @@ export default function DashboardAppBar({ open, toggleDrawer }) {
     },
     {
       title: "Log out from your account",
-      action: handleLogout,
+      action: logout,
       icon: <LogoutIcon fontSize="small" />,
       name: "Log out",
     },
@@ -107,13 +102,12 @@ export default function DashboardAppBar({ open, toggleDrawer }) {
           Dashboard
         </Typography>
 
-        {/* // TODO: ui */}
         <Box sx={{ display: "flex", flexGrow: 0 }}>
           <Typography
             variant="subtitle1"
             mr={2}
           >
-            Account
+            {account.name} {account.surname}
           </Typography>
 
           <Tooltip title="Open settings">
