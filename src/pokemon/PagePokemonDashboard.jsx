@@ -88,7 +88,9 @@ export default function PagePokemonDashboard() {
               item
               xs={12}
             >
-              <Info text="To get Pokémon details search one by name." />
+              <FeedbackLayout>
+                <Info text="To get Pokémon details search one by name." />
+              </FeedbackLayout>
             </Grid>
           )}
         </Grid>
