@@ -188,16 +188,21 @@ export default function PageAccount() {
               </FormControl>
             </Grid>
 
-            <Grid
-              item
-              xs={12}
-            >
-              {editSuccess ? (
+            {editSuccess ? (
+              <Grid
+                item
+                xs={12}
+              >
                 <Success success={editSuccess} />
-              ) : editError ? (
+              </Grid>
+            ) : editError ? (
+              <Grid
+                item
+                xs={12}
+              >
                 <Error error={editError} />
-              ) : null}
-            </Grid>
+              </Grid>
+            ) : null}
 
             <Grid
               item
