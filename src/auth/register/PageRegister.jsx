@@ -1,4 +1,4 @@
-import AuthLayout from "../AuthLayout";
+import AuthLayout from "../../layout/AuthLayout";
 import Register from "./Register";
 
 export default function PageRegister() {
