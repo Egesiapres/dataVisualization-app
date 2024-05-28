@@ -4,8 +4,8 @@
 
 A simple SPA that allows you to:
 
-- login
-- visualize some data retrieved through API calls (Pokedex Api);
+- Register, Login/Logout & Edit your account
+- Visualize some Pokémon information trough API calls made to the [Pokedex Api](https://pokeapi.co/)
 
 <br>
 
@@ -41,25 +41,20 @@ The app will be available at this [link](http://localhost:5173/)
 
 <br>
 
-## 🎨 Design choices
+## 💡 Design choices
 
-### Code
+### ⌨️ Code
 
 #### Steps:
 
-1. Setup the project using Vite (very clean folder structure with no additional useless files);
-2. Structure the folders: I've created an initial tree in order to have an initial draft of the project, in order continue to check what to add before to start to code;
-3. Packages installation;
+1. **Setup:** the project setup has been made using *Vite*, a tool that allows you to have a very clean folder structure with no additional useless files, and a light project template
+2. **Folder structure:** into the src folder, I've created an initial folder tree in order to have a project draft, to have a high level overview of the project before to start coding
+3. **Packages installation:** I've installed the main dependencies the project relies on, such as *Material UI* and *React Router*
+4. **Coding:** I've started coding from the routing part, realizing the needed pages one at the time to achieve the correct flow trough the entire app. To realize the dashboard, I took advantage of a template available in the template section of Material UI's webpage that speed up the UI building process. Then, i customized it
+5. **Approach:** as React as a framework teaches, I've tried to split the interface into reusable components. This allowed me to save time during the development process, and to be consistent with the "design" choices made
 
-### Aesthetic
+### 🎨 Aesthetic
 
-- **Emojis:** they're a current trend, they're able to give an appealing aesthetic and a kind of a flat and very clean design at the same time
-
-<!-- # React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh -->
+- **Colors/UI style:** due to time issues, I've used the default Material UI palette, but I decided to avoid the `outlined` components variant because i found it confusing in some situations, especially when paired with `TextField` components
+- **Feedback:** I tried to give feedback/instructions to the user everywhere it was possible, to not leave him alone or without signals
+- **Emojis:** I've inserted theme because they're a current trend, they're able to give an appealing aesthetic and a kind of flat and very clean design at the same time. They also set a familiar and not too formal communication style
