@@ -1,5 +1,4 @@
 import {
-  Alert,
   Button,
   FormControl,
   Grid,
@@ -16,9 +15,11 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import KeyIcon from "@mui/icons-material/Key";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import EditIcon from "@mui/icons-material/Edit";
 import { AuthContext } from "../context/AuthContext";
 import { handleKeyDown, handleOnChange } from "../utils/event";
+import Success from "../ui/Success";
+import Error from "../ui/Error";
 
 export default function PageAccount() {
   const { account } = useContext(AuthContext);
@@ -53,7 +54,7 @@ export default function PageAccount() {
   const handleEditAccount = () => {
     setEditError(null);
     setEditSuccess(null);
-    
+
     if (updatedAccount !== account) {
       (account.name = name),
         (account.surname = surname),
@@ -104,7 +105,9 @@ export default function PageAccount() {
                 label="Name"
                 placeholder="Name"
                 value={name}
-                onChange={e => handleOnChange(e, setName, setEditError, setEditSuccess)}
+                onChange={e =>
+                  handleOnChange(e, setName, setEditError, setEditSuccess)
+                }
                 onKeyDown={e => handleKeyDown(e, handleEditAccount)}
               />
             </Grid>
@@ -118,7 +121,9 @@ export default function PageAccount() {
                 label="Surname"
                 placeholder="Surname"
                 value={surname}
-                onChange={e => handleOnChange(e, setSurname, setEditError, setEditSuccess)}
+                onChange={e =>
+                  handleOnChange(e, setSurname, setEditError, setEditSuccess)
+                }
                 onKeyDown={e => handleKeyDown(e, handleEditAccount)}
               />
             </Grid>
@@ -132,7 +137,9 @@ export default function PageAccount() {
                 label="E-mail Address"
                 placeholder="E-mail Address"
                 value={email}
-                onChange={e => handleOnChange(e, setEmail, setEditError, setEditSuccess)}
+                onChange={e =>
+                  handleOnChange(e, setEmail, setEditError, setEditSuccess)
+                }
                 onKeyDown={e => handleKeyDown(e, handleEditAccount)}
                 InputProps={{
                   startAdornment: (
@@ -173,7 +180,9 @@ export default function PageAccount() {
                   label="Password"
                   placeholder="Password"
                   value={password}
-                  onChange={e => handleOnChange(e, setPassword, setEditError, setEditSuccess)}
+                  onChange={e =>
+                    handleOnChange(e, setPassword, setEditError, setEditSuccess)
+                  }
                   onKeyDown={e => handleKeyDown(e, handleEditAccount)}
                 />
               </FormControl>
@@ -184,9 +193,9 @@ export default function PageAccount() {
               xs={12}
             >
               {editSuccess ? (
-                <Alert severity="success">{editSuccess.message}</Alert>
+                <Success success={editSuccess} />
               ) : editError ? (
-                <Alert severity="error">{editError.message}</Alert>
+                <Error error={editError} />
               ) : null}
             </Grid>
 
@@ -197,7 +206,7 @@ export default function PageAccount() {
               <Button
                 fullWidth
                 variant="contained"
-                startIcon={<PersonAddIcon />}
+                startIcon={<EditIcon />}
                 onClick={handleEditAccount}
               >
                 Edit Account Details

@@ -24,7 +24,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const createAccount = (email, account) => {
     if (Object.values(account).every(value => value)) {
-      setRegisterSuccess({ message: "Account created successfully" });
+      setRegisterSuccess({ message: "Account created successfully!" });
       setItem(email, account);
     } else {
       setRegisterError({ message: "Required field" });

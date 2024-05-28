@@ -7,6 +7,7 @@ import Error from "../ui/Error";
 import PokemonSearch from "./PokemonSearch";
 import PokemonInfo from "./PokemonInfo";
 import Info from "../ui/Info";
+import FeedbackLayout from "../layout/FeedbackLayout";
 
 export default function PagePokemonDashboard() {
   const [name, setName] = useState("");
@@ -67,7 +68,9 @@ export default function PagePokemonDashboard() {
           {status.isLoading ? (
             <Loading />
           ) : status.error ? (
-            <Error error={status.error} />
+            <FeedbackLayout>
+              <Error error={status.error} />
+            </FeedbackLayout>
           ) : pokemon ? (
             <Grid
               container
@@ -76,7 +79,6 @@ export default function PagePokemonDashboard() {
               <Grid
                 item
                 xs={12}
-                // md={9}
               >
                 <PokemonInfo pokemon={pokemon} />
               </Grid>

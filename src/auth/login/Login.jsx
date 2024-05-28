@@ -1,5 +1,4 @@
 import {
-  Alert,
   Button,
   FormControl,
   FormHelperText,
@@ -21,6 +20,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { handleKeyDown, handleOnChange } from "../../utils/event";
+import Error from "../../ui/Error";
 // import { clearItems } from "../../utils/localStorage";
 
 export default function Login() {
@@ -154,7 +154,7 @@ export default function Login() {
             item
             xs={12}
           >
-            <Alert severity="error">{loginError.message}</Alert>
+            <Error error={loginError} />
           </Grid>
         )}
 

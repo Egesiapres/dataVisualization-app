@@ -1,5 +1,4 @@
 import {
-  Alert,
   Button,
   FormControl,
   FormHelperText,
@@ -22,10 +21,16 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import { handleKeyDown, handleOnChange } from "../../utils/event";
+import Success from "../../ui/Success";
 
 export default function Register() {
-  const { createAccount, registerError, setRegisterError, registerSuccess, setRegisterSuccess } =
-    useContext(AuthContext);
+  const {
+    createAccount,
+    registerError,
+    setRegisterError,
+    registerSuccess,
+    setRegisterSuccess,
+  } = useContext(AuthContext);
 
   const [name, setName] = useState("");
 
@@ -209,7 +214,7 @@ export default function Register() {
             item
             xs={12}
           >
-            <Alert severity="success">{registerSuccess.message}</Alert>
+            <Success success={registerSuccess} />
           </Grid>
         )}
 

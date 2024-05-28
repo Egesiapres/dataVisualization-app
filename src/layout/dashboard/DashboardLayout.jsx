@@ -2,7 +2,6 @@ import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Copyright from "../../app/Copyright";
 import DashboardAppBar from "./DashboardAppBar";
 import DashboardDrawer from "./DashboardDrawer";
 
@@ -41,8 +40,6 @@ export default function DashboardLayout({ children }) {
         <Toolbar />
 
         {children}
-
-        {/* <Copyright sx={{ pt: 4 }} /> */}
       </Box>
     </Box>
   );
