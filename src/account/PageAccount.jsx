@@ -20,6 +20,7 @@ import { AuthContext } from "../context/AuthContext";
 import { handleKeyDown, handleOnChange } from "../utils/event";
 import Success from "../ui/Success";
 import Error from "../ui/Error";
+import { setItem } from "../utils/localStorage";
 
 export default function PageAccount() {
   const { account } = useContext(AuthContext);
@@ -51,15 +52,16 @@ export default function PageAccount() {
     password,
   };
 
+  const areAccountEqual = Object.values(account).every(value =>
+    Object.values(updatedAccount).includes(value)
+  );
+
   const handleEditAccount = () => {
     setEditError(null);
     setEditSuccess(null);
 
-    if (updatedAccount !== account) {
-      (account.name = name),
-        (account.surname = surname),
-        (account.email = email),
-        (account.password = password);
+    if (!areAccountEqual) {      
+      setItem(email, updatedAccount);
 
       setEditSuccess({ message: "Account details successfully updated!" });
     } else {

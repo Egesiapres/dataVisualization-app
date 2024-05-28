@@ -7,4 +7,6 @@ export const getItem = itemName => {
   return JSON.parse(item);
 };
 
+export const clearItem = itemName => localStorage.clear(itemName);
+
 export const clearItems = () => localStorage.clear();
