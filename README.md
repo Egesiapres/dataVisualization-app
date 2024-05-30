@@ -12,7 +12,7 @@ A simple SPA that allows you to:
 ## 📋 Instructions
 
 ### Public URL
-The project is **online,** you can easily access it visiting the public [link](https://egesiapres.github.io/dataVisualization-app/).
+The project is **online,** you can easily access it visiting the public [link](https://egesiapres.github.io/dataVisualization-app/)
 
 
 ### Run in local
