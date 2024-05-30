@@ -11,6 +11,13 @@ A simple SPA that allows you to:
 
 ## 📋 Instructions
 
+### Public URL
+The project is **online,** you can easily access it visiting the public [link](https://egesiapres.github.io/dataVisualization-app/).
+
+
+### Run in local
+Otherwise, you can execute the project **in local** following the steps below:
+
 1. Download the project:
 
 ```
@@ -35,7 +42,7 @@ npm i
 npm run dev
 ```
 
-The app will be available at this [link](http://localhost:5173/)
+The app will be available at this [link](http://localhost:5173/dataVisualization-app/)
 
 ⚠️ Be sure to have **Node.js** and **Git** installed on your machine
 
