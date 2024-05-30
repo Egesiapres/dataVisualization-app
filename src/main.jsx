@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/dataVisualization-app/">
     <AuthContextProvider>
       <App />
     </AuthContextProvider>
