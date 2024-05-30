@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react-swc'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/dataVisualization-app/",
+  base: "https://egesiapres.github.io/dataVisualization-app/",
   plugins: [react()],
 })
